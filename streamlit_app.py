@@ -26,6 +26,8 @@ def login_page():
 
     if st.button("Log In"): 
         if not re.match(r"\w{4}-\w{4}-\w{4}-\w{4}", password):
+            st.session_state.apiUser = None
+            st.session_state.apiPassword = None
             st.warning("Invalid password. Please use an App Password.")
         else:
             st.session_state.apiUser = username
