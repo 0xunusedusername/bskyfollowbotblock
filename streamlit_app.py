@@ -1,6 +1,7 @@
 import streamlit as st
 import re
 import requests
+import time
 from datetime import datetime
 from atproto import Agent
 
@@ -60,23 +61,28 @@ def bluesky_block(apiUser, apiPassword, followLimit):
     bl = ag.get("com.atproto.identity.resolveHandle", handle=BLACKLIST)["did"]
     me = ag.get("com.atproto.identity.resolveHandle", handle=apiUser)["did"]
     result = ag.get("app.bsky.graph.getFollowers", actor=bl)
+   
+    with st.spinner('Blocking...'):
+        output_area = st.empty()
+        output = ""
+        for follow in result["followers"]:
+            f = ag.get("com.atproto.identity.resolveHandle", handle=follow.get("handle"))["did"]
+            follower = ag.get("app.bsky.actor.getProfile", actor=f)
+            if follower.get("followsCount") >= followLimit:
+                ag.post("com.atproto.repo.createRecord", {
+                    "repo": me,
+                    "collection": "app.bsky.graph.block",
+                    "record": {
+                        "$type": "app.bsky.graph.block",
+                        "createdAt": datetime.utcnow().isoformat(),
+                        "subject": f
+                    }
+                })
+                output += f"{follower.get('handle')} BLOCKED!\n"
+                output_area.text(output)
+                time.sleep(0.1)
+            else:
+                continue
     
-    for follow in result["followers"]:
-        f = ag.get("com.atproto.identity.resolveHandle", handle=follow.get("handle"))["did"]
-        follower = ag.get("app.bsky.actor.getProfile", actor=f)
-        if follower.get("followsCount") >= followLimit:
-            ag.post("com.atproto.repo.createRecord", {
-                "repo": me,
-                "collection": "app.bsky.graph.block",
-                "record": {
-                    "$type": "app.bsky.graph.block",
-                    "createdAt": datetime.utcnow().isoformat(),
-                    "subject": f
-                }
-            })
-            st.write(follower.get("handle") + " BLOCKED!")
-        else:
-            continue
-
 if __name__ == "__main__":
     main()
