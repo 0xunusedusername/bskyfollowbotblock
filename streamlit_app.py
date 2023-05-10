@@ -4,6 +4,8 @@ import requests
 from datetime import datetime
 from atproto import Agent
 
+BLACKLIST = "clearsky.bsky.social"
+
 ag = Agent()
 
 def main():
@@ -55,8 +57,9 @@ def authenticate(apiUser, apiPassword):
         
 def bluesky_block(apiUser, apiPassword, followLimit):
     ag.login(apiUser, apiPassword)
+    bl = ag.get("com.atproto.identity.resolveHandle", handle=BLACKLIST)["did"]
     me = ag.get("com.atproto.identity.resolveHandle", handle=apiUser)["did"]
-    result = ag.get("app.bsky.graph.getFollowers", actor=me)
+    result = ag.get("app.bsky.graph.getFollowers", actor=bl)
     
     for follow in result["followers"]:
         f = ag.get("com.atproto.identity.resolveHandle", handle=follow.get("handle"))["did"]
