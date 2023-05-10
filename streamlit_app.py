@@ -34,7 +34,7 @@ def login_page():
             st.session_state.apiPassword = password
             login_success = authenticate(st.session_state.apiUser, st.session_state.apiPassword)
             if login_success:
-            st.session_state.logged_in = True
+                st.session_state.logged_in = True
                 st.experimental_rerun()
             else:
                 st.error("Invalid username or password.")
