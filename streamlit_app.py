@@ -32,15 +32,13 @@ def login_page():
         else:
             st.session_state.apiUser = username
             st.session_state.apiPassword = password
-        
-        login_success = authenticate(st.session_state.apiUser, st.session_state.apiPassword)
-        
-        if login_success:
+            login_success = authenticate(st.session_state.apiUser, st.session_state.apiPassword)
+                if login_success:
             st.session_state.logged_in = True
-            st.experimental_rerun()
-        else:
-            st.error("Invalid username or password.")
-
+                st.experimental_rerun()
+            else:
+                st.error("Invalid username or password.")
+        
 def block_page():
     st.title("Block some spammers!")
     st.write(f"User: {st.session_state.apiUser}")
