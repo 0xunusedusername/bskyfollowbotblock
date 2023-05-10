@@ -21,11 +21,14 @@ def login_page():
 
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
-    st.text("PLEASE USE AN APP PASSWORD!")
+    st.text("Invalid password. This app only accepts an App Password.")
 
     if st.button("Log In"): 
-        st.session_state.apiUser = username
-        st.session_state.apiPassword = password
+        if not re.match(r"\w{4}-\w{4}-\w{4}-\w{4}", password):
+            st.warning("Invalid password. Please use an App Password.")
+        else:
+            st.session_state.apiUser = username
+            st.session_state.apiPassword = password
         
         login_success = authenticate(st.session_state.apiUser, st.session_state.apiPassword)
         
