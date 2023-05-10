@@ -22,7 +22,7 @@ def login_page():
 
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
-    st.text("Invalid password. This app only accepts an App Password.")
+    st.text("This app only accepts an App Password.")
 
     if st.button("Log In"): 
         if not re.match(r"\w{4}-\w{4}-\w{4}-\w{4}", password):
