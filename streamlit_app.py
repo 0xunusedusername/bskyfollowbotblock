@@ -5,7 +5,12 @@ import time
 from datetime import datetime
 from atproto import Agent
 
-BLACKLIST = "clearsky.bsky.social"
+def read_blacklist_file():
+    with open('BLACKLIST.txt', 'r') as file:
+        blacklist = [line.strip() for line in file.readlines()]
+    return blacklist
+
+BLACKLIST = read_blacklist_file()
 
 ag = Agent()
 
@@ -28,7 +33,7 @@ def login_page():
     password = st.text_input("Password", type="password")
     st.text("This app only accepts an App Password.")
 
-    if st.button("Log In"): 
+    if st.button("Log In"):
         if not re.match(r"\w{4}-\w{4}-\w{4}-\w{4}", password):
             st.session_state.apiUser = None
             st.session_state.apiPassword = None
@@ -42,48 +47,49 @@ def login_page():
                 st.experimental_rerun()
             else:
                 st.error("Invalid username or password.")
-        
+
 def block_page():
     st.title("Block some spammers!")
     st.write(f"User: {st.session_state.apiUser}")
     followLimit = int(st.text_input("Follow Limit:", value=30000))
-    if st.button("Block"):
-        bluesky_block(st.session_state.apiUser, st.session_state.apiPassword, followLimit)
-        
+    st.text("The minimum Follow Limit is 10000 users.")
+    if followLimit < 10000:
+        st.warning("Follow Limit should be at least 10000.")
+    else:
+        if st.button("Block"):
+            bluesky_block(st.session_state.apiUser, st.session_state.apiPassword, followLimit)
+
 def authenticate(apiUser, apiPassword):
     try:
         ag.login(apiUser, apiPassword)
         return True
     except:
         return False
-        
+
 def bluesky_block(apiUser, apiPassword, followLimit):
     ag.login(apiUser, apiPassword)
-    bl = ag.get("com.atproto.identity.resolveHandle", handle=BLACKLIST)["did"]
-    me = ag.get("com.atproto.identity.resolveHandle", handle=apiUser)["did"]
-    result = ag.get("app.bsky.graph.getFollowers", actor=bl)
-   
+    user = ag.get("com.atproto.identity.resolveHandle", handle=apiUser)["did"]
+
     with st.spinner('Blocking...'):
         output_area = st.empty()
         output = ""
-        for follow in result["followers"]:
-            f = ag.get("com.atproto.identity.resolveHandle", handle=follow.get("handle"))["did"]
-            follower = ag.get("app.bsky.actor.getProfile", actor=f)
-            if follower.get("followsCount") >= followLimit:
+        for did in BLACKLIST:
+            userToBlock = ag.get("app.bsky.actor.getProfile", actor=did)
+            if userToBlock.get("followsCount") >= followLimit:
                 ag.post("com.atproto.repo.createRecord", {
-                    "repo": me,
+                    "repo": user,
                     "collection": "app.bsky.graph.block",
                     "record": {
                         "$type": "app.bsky.graph.block",
                         "createdAt": datetime.utcnow().isoformat(),
-                        "subject": f
+                        "subject": userToBlock
                     }
                 })
-                output += f"{follower.get('handle')} BLOCKED!\n"
+                output += f"{userToBlock.get('handle')} BLOCKED!\n"
                 output_area.text(output)
                 time.sleep(0.1)
             else:
                 continue
-    
+
 if __name__ == "__main__":
     main()
