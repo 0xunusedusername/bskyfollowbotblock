@@ -64,9 +64,6 @@ def block_page():
     else:
         st.warning("Please enter a Follow Limit.")
 
-    if followLimit < 10000:
-        st.warning("Follow Limit should be at least 10000.")
-
 def authenticate(apiUser, apiPassword):
     try:
         ag.login(apiUser, apiPassword)
