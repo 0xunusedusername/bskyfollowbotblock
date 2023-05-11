@@ -73,8 +73,8 @@ def bluesky_block(apiUser, apiPassword, followLimit):
     with st.spinner('Blocking...'):
         output_area = st.empty()
         output = ""
-        for did in BLACKLIST:
-            userToBlock = ag.get("app.bsky.actor.getProfile", actor=did)
+        for blDid in BLACKLIST:
+            userToBlock = ag.get("app.bsky.actor.getProfile", actor=blDid)
             if userToBlock.get("followsCount") >= followLimit:
                 ag.post("com.atproto.repo.createRecord", {
                     "repo": user,
@@ -82,7 +82,7 @@ def bluesky_block(apiUser, apiPassword, followLimit):
                     "record": {
                         "$type": "app.bsky.graph.block",
                         "createdAt": datetime.utcnow().isoformat(),
-                        "subject": userToBlock
+                        "subject": blDid
                     }
                 })
                 output += f"{userToBlock.get('handle')} BLOCKED!\n"
