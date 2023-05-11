@@ -24,6 +24,7 @@ def login_page():
     st.title("Bluesky Spam Follower Block")
 
     username = st.text_input("Username")
+    st.text("Use your full Bluesky handle. Ex: username.bsky.social (no @ sign).")
     password = st.text_input("Password", type="password")
     st.text("This app only accepts an App Password.")
 
