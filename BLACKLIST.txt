@@ -39,3 +39,5 @@ did:plc:fghjuxxxssvf2eml7twstd4o
 did:plc:krwqzpbetxtkbbw5ncumviyr
 did:plc:lmkzmvv6sdxntwtyxpg7fqqq
 did:plc:ukmydcp43it4rcwiyhrckryn
+did:plc:oideekcq5mb76zg6sc5ntbly
+did:plc:rwbe4e7d7o3fwwcqkoyjvp4v
