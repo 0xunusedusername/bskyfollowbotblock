@@ -32,11 +32,6 @@ def login_page():
     st.text("Use your full Bluesky handle. Ex: username.bsky.social (no @ sign).")
     password = st.text_input("Password", type="password")
     st.text("This app only accepts an App Password.")
-    st.markdown("""
-- You can create an app password [here](https://staging.bsky.app/settings/app-passwords).
-- This app will automatically block all users on the blacklist that are following an amount of accounts equal to or above the threshold you set.
-- The blacklist will be updated over time, but feel free to reach out if you see an account that was missed!
-""")
 
     if st.button("Log In"):
         if not re.match(r"\w{4}-\w{4}-\w{4}-\w{4}", password):
@@ -52,6 +47,12 @@ def login_page():
                 st.experimental_rerun()
             else:
                 st.error("Invalid username or password.")
+
+    st.markdown("""
+- You can create an app password [here](https://staging.bsky.app/settings/app-passwords).
+- This app will automatically block all users on the blacklist that are following an amount of accounts equal to or above the threshold you set.
+- The blacklist will be updated over time, but feel free to reach out if you see an account that was missed!
+""")
 
 def block_page():
     st.title("Block some spammers!")
