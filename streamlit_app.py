@@ -48,6 +48,12 @@ def login_page():
             else:
                 st.error("Invalid username or password.")
 
+    st.markdown("""
+- You can create an app password [here](https://staging.bsky.app/settings/app-passwords).
+- This app will automatically block all users on the blacklist that are following an amount of accounts equal to or above the threshold you set.
+- The blacklist will be updated over time, but feel free to reach out if you see an account that was missed!
+""")
+
 def block_page():
     st.title("Block some spammers!")
     st.write(f"User: {st.session_state.apiUser}")
