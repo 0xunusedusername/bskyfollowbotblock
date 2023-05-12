@@ -58,3 +58,4 @@ did:plc:vfd4wfkntvprozbhryhrzftn
 did:plc:he5snxdtvvyds6rchrpkhegd
 did:plc:jffmt63qmosqkssd6if3jegz
 did:plc:ui7jfx3hdkfb4qr4ncfbqgvv
+did:plc:ov4ujxpofu4qzow6xwylzdxu
