@@ -5,7 +5,6 @@ did:plc:bpauyhw2aqdubjfug4j72nci
 did:plc:2rhgf24qcpdxuscon3gwp6it
 did:plc:5t2x7mmh4ofspj7apwpgif5l
 did:plc:cm4bwax4evxmkiuwxvvkvlmx
-did:plc:iijrtk7ocored6zuziwmqq3c
 did:plc:pdac24jyypwultrppa457voe
 did:plc:gavqr7yuapgfhfr4hvosjyoh
 did:plc:wbuezhu46trfmg5hduqphn3r
