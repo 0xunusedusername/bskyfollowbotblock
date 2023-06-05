@@ -58,3 +58,15 @@ did:plc:he5snxdtvvyds6rchrpkhegd
 did:plc:jffmt63qmosqkssd6if3jegz
 did:plc:ui7jfx3hdkfb4qr4ncfbqgvv
 did:plc:ov4ujxpofu4qzow6xwylzdxu
+did:plc:thcgl3bxpvq6a3ojj6pjyzao
+did:plc:zjfqitgtre43o3b4ccycfyxk
+did:plc:iijrtk7ocored6zuziwmqq3c
+did:plc:jg66drxkqd7zrvluorpfie6q
+did:plc:fezgqukekwyvhz2ljrmcnmrk
+did:plc:4ifdd6rdbcqsaivlfcaex2db
+did:plc:7v4zh2oqny3s7zejpapnm55s
+did:plc:iaa7if53pbbgbuo37g6gv2w2
+did:plc:d3q2io3xsydlwoeriw6snpex
+did:plc:kbvdjqqx3j7xkrjt3uf4wl32
+did:plc:ana2ly3vzirck67w3rvtugxy
+did:plc:mtouqwu7qg4hcr67thqa55rq
