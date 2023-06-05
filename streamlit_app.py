@@ -57,16 +57,12 @@ def login_page():
 def block_page():
     st.title("Block some spammers!")
     st.write(f"User: {st.session_state.apiUser}")
-    followLimitInput = st.text_input("Follow Limit:", value=30000)
-    st.text("The minimum Follow Limit is 10000 users.")
+    followLimitInput = st.text_input("Follow Limit:", value=0)
 
     if followLimitInput:
         followLimit = int(followLimitInput)
-        if followLimit < 10000:
-            st.warning("Follow Limit should be at least 10000.")
-        else:
-            if st.button("Block"):
-                bluesky_block(st.session_state.apiUser, st.session_state.apiPassword, followLimit)
+        if st.button("Block"):
+            bluesky_block(st.session_state.apiUser, st.session_state.apiPassword, followLimit)
     else:
         st.warning("Please enter a Follow Limit.")
 
