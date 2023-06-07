@@ -70,3 +70,5 @@ did:plc:d3q2io3xsydlwoeriw6snpex
 did:plc:kbvdjqqx3j7xkrjt3uf4wl32
 did:plc:ana2ly3vzirck67w3rvtugxy
 did:plc:mtouqwu7qg4hcr67thqa55rq
+did:plc:sxhvvd27nuho3aqdfxybwt3d
+did:plc:ueixuh2nxha6ubxte7esqmxc
