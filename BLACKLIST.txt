@@ -72,3 +72,4 @@ did:plc:ana2ly3vzirck67w3rvtugxy
 did:plc:mtouqwu7qg4hcr67thqa55rq
 did:plc:sxhvvd27nuho3aqdfxybwt3d
 did:plc:ueixuh2nxha6ubxte7esqmxc
+did:plc:xfqcsi7wuwedeqaa5m7aih44
